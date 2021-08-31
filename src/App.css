@@ -1,0 +1,11 @@
+.todo-card {
+  max-width: 300px;
+}
+
+.row {
+  display: flex;
+}
+
+.column {
+  flex: 50%;
+}
