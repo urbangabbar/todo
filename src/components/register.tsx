@@ -1,9 +1,8 @@
 import { useFormik } from "formik";
-import { useHistory } from "react-router";
 import * as Yup from "yup";
 import { PartialUser } from "../App";
 
-const LoginSchema = Yup.object().shape({
+const RegisterSchema = Yup.object().shape({
   userName: Yup.string()
     .min(2, "Too Short!")
     .max(50, "Too Long!")
@@ -14,10 +13,10 @@ const LoginSchema = Yup.object().shape({
     .required("Required"),
 });
 
-export const Login = ({
-  performLoginAction,
+export const Register = ({
+  performRegisterAction,
 }: {
-  performLoginAction: (user: PartialUser) => void;
+  performRegisterAction: (user: PartialUser) => void;
 }) => {
   const formik = useFormik({
     initialValues: {
@@ -25,16 +24,14 @@ export const Login = ({
       password: "",
     },
     onSubmit: (val) => {
-      performLoginAction(val);
+      performRegisterAction(val);
     },
-    validationSchema: LoginSchema,
+    validationSchema: RegisterSchema,
   });
-
-  const history = useHistory();
 
   return (
     <div className="mt-5">
-      <h3>Login</h3>
+        <h3>Register</h3>
       <form>
         <div className="mb-3">
           <label htmlFor="userName" className="form-label">
@@ -82,15 +79,10 @@ export const Login = ({
             e.preventDefault();
             formik.handleSubmit();
           }}
-          className="btn btn-primary mx-1"
+          className="btn btn-primary"
         >
           Submit
         </button>
-        <button  type="button"
-          onClick={(e) => {
-            history.push('/signup')
-          }}
-          className="btn btn-primary mx-1">Register</button>
       </form>
     </div>
   );
